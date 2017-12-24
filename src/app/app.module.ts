@@ -15,6 +15,13 @@ import { RegisterComponent } from './components/register/register.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
+import { AngularFireModule } from "angularfire2";
+import { AngularFireDatabaseModule,AngularFireDatabase } from "angularfire2/database";
+import { AngularFireAuthModule } from "angularfire2/auth";
+import { environment } from "../environments/environment";
+
+import { ClientService } from "./services/client.service";
+
 // creates routes
 const appRoutes = [
   {path:'',component:DashboardComponent},
@@ -40,9 +47,13 @@ const appRoutes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    AngularFireModule.initializeApp(environment.firebase,'clientpanel'),
+    AngularFireAuthModule
   ],
-  providers: [],
+  providers: [
+    AngularFireDatabase,AngularFireDatabaseModule,ClientService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
