@@ -29,4 +29,8 @@ export class ClientService {
     this.client= this.db.object('/clients/'+id).valueChanges();
     return this.client;
    }
+   updateBalance(id:string,client:Client){
+      return this.clientsRef.update(id,client);
+   }
+
 }
