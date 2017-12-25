@@ -15,6 +15,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
+import { FormsModule } from "@angular/forms";
+
 import { AngularFireModule } from "angularfire2";
 import { AngularFireDatabaseModule,AngularFireDatabase } from "angularfire2/database";
 import { AngularFireAuthModule } from "angularfire2/auth";
@@ -26,7 +28,8 @@ import { ClientService } from "./services/client.service";
 const appRoutes = [
   {path:'',component:DashboardComponent},
   {path:'register',component:RegisterComponent},
-  {path:'login',component:LoginComponent}
+  {path:'login',component:LoginComponent},
+  {path:'add-client',component:AddClientComponent}
 
 ];
 
@@ -49,7 +52,8 @@ const appRoutes = [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(environment.firebase,'clientpanel'),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    FormsModule
   ],
   providers: [
     AngularFireDatabase,AngularFireDatabaseModule,ClientService
