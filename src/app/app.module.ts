@@ -26,6 +26,7 @@ import { AngularFireAuthModule } from "angularfire2/auth";
 import { environment } from "../environments/environment";
 
 import { ClientService } from "./services/client.service";
+import { AuthService } from "./services/auth.service";
 
 // creates routes
 const appRoutes = [
@@ -61,7 +62,7 @@ const appRoutes = [
     FormsModule,FlashMessagesModule
   ],
   providers: [
-    AngularFireDatabase,AngularFireDatabaseModule,ClientService,FlashMessagesService
+    AngularFireDatabase,AngularFireDatabaseModule,ClientService,FlashMessagesService,AuthService
   ],
   bootstrap: [AppComponent]
 })
