@@ -28,14 +28,16 @@ import { environment } from "../environments/environment";
 import { ClientService } from "./services/client.service";
 import { AuthService } from "./services/auth.service";
 
+import { AuthGuard } from "./guards/auth.gaurd";
+
 // creates routes
 const appRoutes = [
-  {path:'',component:DashboardComponent},
+  {path:'',component:DashboardComponent,canActivate:[AuthGuard]},
   {path:'register',component:RegisterComponent},
   {path:'login',component:LoginComponent},
-  {path:'add-client',component:AddClientComponent},
-  {path:'client/:id',component:ClientsDetailsComponent},
-  {path:'edit-client/:id',component:EditClientComponent}
+  {path:'add-client',component:AddClientComponent,canActivate:[AuthGuard]},
+  {path:'client/:id',component:ClientsDetailsComponent,canActivate:[AuthGuard]},
+  {path:'edit-client/:id',component:EditClientComponent,canActivate:[AuthGuard]}
 
 ];
 
@@ -62,7 +64,7 @@ const appRoutes = [
     FormsModule,FlashMessagesModule
   ],
   providers: [
-    AngularFireDatabase,AngularFireDatabaseModule,ClientService,FlashMessagesService,AuthService
+    AngularFireDatabase,AngularFireDatabaseModule,ClientService,FlashMessagesService,AuthService,AuthGuard
   ],
   bootstrap: [AppComponent]
 })
