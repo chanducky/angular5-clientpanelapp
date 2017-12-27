@@ -27,18 +27,20 @@ import { environment } from "../environments/environment";
 
 import { ClientService } from "./services/client.service";
 import { AuthService } from "./services/auth.service";
-
 import { AuthGuard } from "./guards/auth.gaurd";
+import { SettingsService } from "./services/settings.service";
+import { RegisterGaurd } from "./guards/register.gaurd";
 
 // creates routes
 const appRoutes = [
   {path:'',component:DashboardComponent,canActivate:[AuthGuard]},
-  {path:'register',component:RegisterComponent},
+  {path:'register',component:RegisterComponent,canActivate:[RegisterGaurd]},
   {path:'login',component:LoginComponent},
   {path:'add-client',component:AddClientComponent,canActivate:[AuthGuard]},
   {path:'client/:id',component:ClientsDetailsComponent,canActivate:[AuthGuard]},
-  {path:'edit-client/:id',component:EditClientComponent,canActivate:[AuthGuard]}
-
+  {path:'edit-client/:id',component:EditClientComponent,canActivate:[AuthGuard]},
+  {path:'settings',component:SettingsComponent,canActivate:[AuthGuard]},
+  {path:'**',component:PageNotFoundComponent}
 ];
 
 @NgModule({
@@ -64,7 +66,9 @@ const appRoutes = [
     FormsModule,FlashMessagesModule
   ],
   providers: [
-    AngularFireDatabase,AngularFireDatabaseModule,ClientService,FlashMessagesService,AuthService,AuthGuard
+    AngularFireDatabase,AngularFireDatabaseModule,ClientService,
+    FlashMessagesService,AuthService,AuthGuard,SettingsService,
+    RegisterGaurd
   ],
   bootstrap: [AppComponent]
 })
